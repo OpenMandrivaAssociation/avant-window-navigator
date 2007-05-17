@@ -1,6 +1,6 @@
 %define name avant-window-navigator
 %define version 0.1.1
-%define svn 173
+%define svn 179
 %if %svn
 %define release %mkrel %svn.1
 %else
@@ -13,7 +13,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 %if %svn
-Source0: %{name}-%{version}-%{svn}.tar.bz2
+Source0: %{name}-%{svn}.tar.bz2
 %else
 Source0: %{name}-%{version}.tar.bz2
 %endif
@@ -29,7 +29,6 @@ BuildRequires: libgnome2-devel
 BuildRequires: libgnome-desktop-2-devel
 BuildRequires: libwnck-devel
 BuildRequires: ImageMagick
-BuildRequires: sed
 BuildRequires: desktop-file-utils
 Requires: gnome-python
 
@@ -39,11 +38,15 @@ a view of your running applications in a dock at the bottom of the screen,
 identified by their icon.
 
 %prep
+%if %svn
+%setup -q -n %{name}
+%else
 %setup -q
+%endif
 
 %build
 ./autogen.sh -V
-%configure2_5x
+%configure
 %make
 
 %install
@@ -73,10 +76,8 @@ convert -scale 16 data/%{name}-48.png %buildroot%_miconsdir/%{name}.png
 convert -scale 16 data/%{name}-48.png %buildroot%_iconsdir/hicolor/16x16/apps/%{name}.png
 install -m 644 %buildroot%_datadir/%{name}/%{name}.svg %buildroot%_iconsdir/hicolor/scalable/apps/%{name}.svg
 
-sed -e 's/\/usr\/share\/%{name}\/%{name}-48.png/%{name}/' %buildroot%{_datadir}/applications/%{name}.desktop > %buildroot%{_datadir}/applications/%{name}.new && \
-mv -f %buildroot%{_datadir}/applications/%{name}.new %buildroot%{_datadir}/applications/%{name}.desktop
-sed -e 's/\/usr\/share\/%{name}\/%{name}-48.png/%{name}/' %buildroot%{_datadir}/applications/avant-preferences.desktop > %buildroot%{_datadir}/applications/avant-preferences.new && \
-mv -f %buildroot%{_datadir}/applications/avant-preferences.new %buildroot%{_datadir}/applications/avant-preferences.desktop
+perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir}/applications/%{name}.desktop
+perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir}/applications/avant-preferences.desktop
 
 %post
 %update_menus
