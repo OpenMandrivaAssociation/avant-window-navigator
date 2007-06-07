@@ -1,12 +1,11 @@
 %define name avant-window-navigator
 %define version 0.1.1
-%define svn 179
+%define svn 186
 %if %svn
 %define release %mkrel %svn.1
 %else
 %define release %mkrel 1
 %endif
-
 
 Summary: Dock-style window selector for GNOME
 Name: %{name}
