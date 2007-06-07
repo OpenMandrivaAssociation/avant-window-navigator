@@ -92,6 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc README AUTHORS ChangeLog TODO
 %_bindir/%{name}
+%_bindir/avant-launchers
 %_bindir/avant-preferences
 %dir %_datadir/%{name}
 %_datadir/%{name}/active/*.png
@@ -109,5 +110,6 @@ rm -rf $RPM_BUILD_ROOT
 %_iconsdir/%{name}.png
 %_miconsdir/%{name}.png
 %_datadir/%{name}/window.glade
+%_datadir/%{name}/avant-launchers.glade
 
 
