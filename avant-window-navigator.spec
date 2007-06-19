@@ -1,11 +1,17 @@
 %define name avant-window-navigator
 %define version 0.1.1
-%define svn 186
+%define svn 201
 %if %svn
 %define release %mkrel %svn.1
 %else
 %define release %mkrel 1
 %endif
+%define library_name awn
+%define major 0
+%define libname %mklibname %library_name %major
+%define develname %mklibname %library_name -d
+
+%define schemas switcher trash
 
 Summary: Dock-style window selector for GNOME
 Name: %{name}
@@ -36,6 +42,26 @@ Avant-window-navigator is a dock-style window list for GNOME. It provides
 a view of your running applications in a dock at the bottom of the screen,
 identified by their icon.
 
+%package -n %libname
+Group: System/Libraries
+Summary: Shared libraries for avant-window-navigator
+
+%description -n %libname
+Avant-window-navigator is a dock-style window list for GNOME. It provides
+a view of your running applications in a dock at the bottom of the screen,
+identified by their icon.
+
+%package -n %develname
+Group: Development/C
+Summary: Development libraries for avant-window-navigator
+Requires: %libname = %version
+Provides: %name-devel = %version-%release
+
+%description -n %develname
+Avant-window-navigator is a dock-style window list for GNOME. It provides
+a view of your running applications in a dock at the bottom of the screen,
+identified by their icon.
+
 %prep
 %if %svn
 %setup -q -n %{name}
@@ -45,7 +71,7 @@ identified by their icon.
 
 %build
 ./autogen.sh -V
-%configure
+%configure --disable-schemas-install
 %make
 
 %install
@@ -54,7 +80,6 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang %name
 
 desktop-file-install --vendor="" \
-  --add-category="X-MandrivaLinux-System-Session-Windowmanagers" \
   --add-category="GTK" \
   --remove-category="Utility" \
   --remove-category="X-Fedora" \
@@ -81,6 +106,11 @@ perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir
 %post
 %update_menus
 %update_icon_cache hicolor
+%post_install_gconf_schemas %{schemas}
+
+%preun
+%preun_uninstall_gconf_schemas %{schemas}
+
 %postun
 %update_menus
 %clean_icon_cache hicolor
@@ -94,12 +124,13 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/%{name}
 %_bindir/avant-launchers
 %_bindir/avant-preferences
-%dir %_datadir/%{name}
-%_datadir/%{name}/active/*.png
+%_bindir/avant-applets
+%_bindir/awn-applet-activation
+%_datadir/%{name}
 %_datadir/applications/%{name}.desktop
 %_datadir/applications/avant-preferences.desktop
-%_datadir/%{name}/*.png
-%_datadir/%{name}/%{name}.svg
+%_libdir/%{library_name}
+%_sysconfdir/gconf/schemas/*.schemas
 %_iconsdir/hicolor/16x16/apps/%{name}.png
 %_iconsdir/hicolor/22x22/apps/%{name}.png
 %_iconsdir/hicolor/24x24/apps/%{name}.png
@@ -109,7 +140,14 @@ rm -rf $RPM_BUILD_ROOT
 %_liconsdir/%{name}.png
 %_iconsdir/%{name}.png
 %_miconsdir/%{name}.png
-%_datadir/%{name}/window.glade
-%_datadir/%{name}/avant-launchers.glade
 
+%files -n %libname
+%defattr(-,root,root)
+%_libdir/*.so.*
 
+%files -n %develname
+%defattr(-,root,root,-)
+%{_includedir}/lib%{library_name}
+%{_libdir}/lib*.so
+%{_libdir}/*.*a
+%{_libdir}/pkgconfig/%library_name.pc
