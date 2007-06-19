@@ -34,6 +34,8 @@ BuildRequires: libgnome2-devel
 BuildRequires: libgnome-desktop-2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: libwnck-devel
+BuildRequires: libxcomposite-devel
+BuildRequires: libxdamage-devel
 BuildRequires: ImageMagick
 BuildRequires: desktop-file-utils
 Requires: gnome-python
