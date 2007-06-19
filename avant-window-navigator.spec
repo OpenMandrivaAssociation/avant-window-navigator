@@ -32,6 +32,7 @@ BuildRequires: intltool
 BuildRequires: libgtk+2-devel
 BuildRequires: libgnome2-devel
 BuildRequires: libgnome-desktop-2-devel
+BuildRequires: libglade2.0-devel
 BuildRequires: libwnck-devel
 BuildRequires: ImageMagick
 BuildRequires: desktop-file-utils
