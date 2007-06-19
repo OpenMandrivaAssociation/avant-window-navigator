@@ -2,7 +2,7 @@
 %define version 0.1.1
 %define svn 201
 %if %svn
-%define release %mkrel %svn.1
+%define release %mkrel %svn.2
 %else
 %define release %mkrel 1
 %endif
@@ -59,6 +59,7 @@ Group: Development/C
 Summary: Development libraries for avant-window-navigator
 Requires: %libname = %version
 Provides: %name-devel = %version-%release
+Provides: %library_name-devel = %version-%release
 
 %description -n %develname
 Avant-window-navigator is a dock-style window list for GNOME. It provides
