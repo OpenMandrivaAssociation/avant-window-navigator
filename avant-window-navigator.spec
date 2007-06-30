@@ -1,8 +1,8 @@
 %define name avant-window-navigator
 %define version 0.1.1
-%define svn 201
+%define svn 214
 %if %svn
-%define release %mkrel %svn.2
+%define release %mkrel %svn.1
 %else
 %define release %mkrel 1
 %endif
@@ -85,7 +85,6 @@ rm -rf $RPM_BUILD_ROOT
 
 desktop-file-install --vendor="" \
   --add-category="GTK" \
-  --remove-category="Utility" \
   --remove-category="X-Fedora" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
 $RPM_BUILD_ROOT%{_datadir}/applications/*
