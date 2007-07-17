@@ -1,15 +1,23 @@
 %define name avant-window-navigator
 %define version 0.1.1
-%define svn 214
-%if %svn
-%define release %mkrel %svn.1
-%else
-%define release %mkrel 1
-%endif
-%define library_name awn
+%define rel 1
+%define svn 227
+
 %define major 0
+%define library_name awn
 %define libname %mklibname %library_name %major
 %define develname %mklibname %library_name -d
+
+%if %svn
+%define srcname %{name}-%{svn}
+%define distname %{name}
+# NB this should be "%mkrel 0." but it can't be until next release unf....
+%define release %mkrel %{svn}.%{rel}
+%else
+%define srcname %{name}-%{version}
+%define distname %{name}-%{version}
+%define release %mkrel %{rel}
+%endif
 
 %define schemas switcher trash
 
@@ -17,11 +25,7 @@ Summary: Dock-style window selector for GNOME
 Name: %{name}
 Version: %{version}
 Release: %{release}
-%if %svn
-Source0: %{name}-%{svn}.tar.bz2
-%else
-Source0: %{name}-%{version}.tar.bz2
-%endif
+Source0: %{srcname}.tar.bz2
 License: GPL
 Group: Graphical desktop/GNOME
 Url: http://code.google.com/p/avant-window-navigator/
@@ -67,19 +71,17 @@ a view of your running applications in a dock at the bottom of the screen,
 identified by their icon.
 
 %prep
-%if %svn
-%setup -q -n %{name}
-%else
-%setup -q
-%endif
+%setup -q -n %{distname}
 
 %build
+%if %svn
 ./autogen.sh -V
+%endif
 %configure --disable-schemas-install
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 %find_lang %name
 
@@ -119,7 +121,7 @@ perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir
 %clean_icon_cache hicolor
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files -f %name.lang
 %defattr(-,root,root)
