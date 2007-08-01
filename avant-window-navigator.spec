@@ -1,18 +1,20 @@
 %define name avant-window-navigator
 %define version 0.1.1
 %define rel 1
-%define svn 227
+%define snap 12
 
 %define major 0
 %define library_name awn
 %define libname %mklibname %library_name %major
 %define develname %mklibname %library_name -d
 
-%if %svn
-%define srcname %{name}-%{svn}
+%if %snap
+%define srcname %{name}-%{snap}
 %define distname %{name}
 # NB this should be "%mkrel 0." but it can't be until next release unf....
-%define release %mkrel %{svn}.%{rel}
+# NB 228 prefix due to RCS change to bzr and want to avoid epoch...
+#    Version 0.2 will be out soon anyway....
+%define release %mkrel 228.%{snap}.%{rel}
 %else
 %define srcname %{name}-%{version}
 %define distname %{name}-%{version}
@@ -28,7 +30,7 @@ Release: %{release}
 Source0: %{srcname}.tar.bz2
 License: GPL
 Group: Graphical desktop/GNOME
-Url: http://code.google.com/p/avant-window-navigator/
+Url: https://launchpad.net/awn
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: gnome-common
 BuildRequires: libGConf2-devel
@@ -74,7 +76,7 @@ identified by their icon.
 %setup -q -n %{distname}
 
 %build
-%if %svn
+%if %snap
 ./autogen.sh -V
 %endif
 %configure --disable-schemas-install
