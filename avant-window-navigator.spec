@@ -1,7 +1,7 @@
 %define name avant-window-navigator
 %define version 0.1.1
 %define rel 1
-%define snap 24
+%define snap 32
 
 %define major 0
 %define library_name awn
