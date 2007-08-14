@@ -1,20 +1,17 @@
 %define name avant-window-navigator
-%define version 0.1.1
+%define version 0.1.2
 %define rel 1
-%define snap 32
+%define bzr 35
 
 %define major 0
 %define library_name awn
 %define libname %mklibname %library_name %major
 %define develname %mklibname %library_name -d
 
-%if %snap
-%define srcname %{name}-%{snap}
+%if %bzr
+%define srcname %{name}-%{bzr}
 %define distname %{name}
-# NB this should be "%mkrel 0." but it can't be until next release unf....
-# NB 228 prefix due to RCS change to bzr and want to avoid epoch...
-#    Version 0.2 will be out soon anyway....
-%define release %mkrel 228.%{snap}.%{rel}
+%define release %mkrel 0.%{bzr}.%{rel}
 %else
 %define srcname %{name}-%{version}
 %define distname %{name}-%{version}
@@ -28,7 +25,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{srcname}.tar.bz2
-License: GPL
+License: GPLv2+
 Group: Graphical desktop/GNOME
 Url: https://launchpad.net/awn
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -76,7 +73,7 @@ identified by their icon.
 %setup -q -n %{distname}
 
 %build
-%if %snap
+%if %bzr
 ./autogen.sh -V
 %endif
 %configure --disable-schemas-install
@@ -93,19 +90,11 @@ desktop-file-install --vendor="" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
 $RPM_BUILD_ROOT%{_datadir}/applications/*
 
-mkdir -p %buildroot{%_liconsdir,%_miconsdir}
-mkdir -p %buildroot%{_iconsdir}/hicolor
-mkdir -p %buildroot%{_iconsdir}/hicolor/{48x48,32x32,24x24,22x22,16x16,scalable}
-mkdir -p %buildroot%{_iconsdir}/hicolor/{48x48,32x32,24x24,22x22,16x16,scalable}/apps
-install -m 644 data/%{name}-48.png %buildroot%_liconsdir/%{name}.png
-install -m 644 data/%{name}-48.png %buildroot%_iconsdir/hicolor/48x48/apps/%{name}.png 
-convert -scale 32 data/%{name}-48.png %buildroot%_iconsdir/%{name}.png
-convert -scale 32 data/%{name}-48.png %buildroot%_iconsdir/hicolor/32x32/apps/%{name}.png
-convert -scale 24 data/%{name}-48.png %buildroot%_iconsdir/hicolor/24x24/apps/%{name}.png
-convert -scale 22 data/%{name}-48.png %buildroot%_iconsdir/hicolor/22x22/apps/%{name}.png
-convert -scale 16 data/%{name}-48.png %buildroot%_miconsdir/%{name}.png
-convert -scale 16 data/%{name}-48.png %buildroot%_iconsdir/hicolor/16x16/apps/%{name}.png
+mkdir -p %buildroot%{_iconsdir}/hicolor/{48x48,32x32,16x16,scalable}/apps
 install -m 644 %buildroot%_datadir/%{name}/%{name}.svg %buildroot%_iconsdir/hicolor/scalable/apps/%{name}.svg
+install -m 644 data/%{name}-48.png %buildroot%_iconsdir/hicolor/48x48/apps/%{name}.png 
+convert -scale 32 data/%{name}-48.png %buildroot%_iconsdir/hicolor/32x32/apps/%{name}.png
+convert -scale 16 data/%{name}-48.png %buildroot%_iconsdir/hicolor/16x16/apps/%{name}.png
 
 perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir}/applications/%{name}.desktop
 perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir}/applications/avant-preferences.desktop
@@ -139,18 +128,13 @@ rm -rf %{buildroot}
 %_libdir/%{library_name}
 %_sysconfdir/gconf/schemas/*.schemas
 %_iconsdir/hicolor/16x16/apps/%{name}.png
-%_iconsdir/hicolor/22x22/apps/%{name}.png
-%_iconsdir/hicolor/24x24/apps/%{name}.png
 %_iconsdir/hicolor/32x32/apps/%{name}.png
 %_iconsdir/hicolor/48x48/apps/%{name}.png
 %_iconsdir/hicolor/scalable/apps/%{name}.svg
-%_liconsdir/%{name}.png
-%_iconsdir/%{name}.png
-%_miconsdir/%{name}.png
 
 %files -n %libname
 %defattr(-,root,root)
-%_libdir/*.so.*
+%_libdir/*.so.%{major}*
 
 %files -n %develname
 %defattr(-,root,root,-)
