@@ -1,7 +1,7 @@
 %define name avant-window-navigator
 %define version 0.1.2
 %define rel 1
-%define bzr 35
+%define bzr 52
 
 %define major 0
 %define library_name awn
@@ -97,7 +97,7 @@ convert -scale 32 data/%{name}-48.png %buildroot%_iconsdir/hicolor/32x32/apps/%{
 convert -scale 16 data/%{name}-48.png %buildroot%_iconsdir/hicolor/16x16/apps/%{name}.png
 
 perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir}/applications/%{name}.desktop
-perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir}/applications/avant-preferences.desktop
+perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir}/applications/awn-manager.desktop
 
 %post
 %update_menus
@@ -118,13 +118,11 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README AUTHORS ChangeLog TODO
 %_bindir/%{name}
-%_bindir/avant-launchers
-%_bindir/avant-preferences
-%_bindir/avant-applets
 %_bindir/awn-applet-activation
+%_bindir/awn-manager
 %_datadir/%{name}
 %_datadir/applications/%{name}.desktop
-%_datadir/applications/avant-preferences.desktop
+%_datadir/applications/awn-manager.desktop
 %_libdir/%{library_name}
 %_sysconfdir/gconf/schemas/*.schemas
 %_iconsdir/hicolor/16x16/apps/%{name}.png
