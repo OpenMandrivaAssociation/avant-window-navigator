@@ -1,7 +1,7 @@
 %define name avant-window-navigator
 %define version 0.1.2
 %define rel 1
-%define bzr 52
+%define bzr 67
 
 %define major 0
 %define library_name awn
