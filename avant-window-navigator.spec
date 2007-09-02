@@ -41,6 +41,7 @@ BuildRequires: libxcomposite-devel
 BuildRequires: libxdamage-devel
 BuildRequires: ImageMagick
 BuildRequires: desktop-file-utils
+BuildRequires: python-devel
 Requires: gnome-python
 
 %description
