@@ -1,7 +1,7 @@
 %define name avant-window-navigator
 %define version 0.1.2
 %define rel 1
-%define bzr 67
+%define bzr 81
 
 %define major 0
 %define library_name awn
@@ -133,6 +133,8 @@ rm -rf %{buildroot}
 %files -n %libname
 %defattr(-,root,root)
 %_libdir/*.so.%{major}*
+%dir %py_platsitedir/%library_name
+%py_platsitedir/%library_name/*
 
 %files -n %develname
 %defattr(-,root,root,-)
