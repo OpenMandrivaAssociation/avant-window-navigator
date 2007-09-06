@@ -1,7 +1,7 @@
 %define name avant-window-navigator
 %define version 0.1.2
 %define rel 1
-%define bzr 81
+%define bzr 88
 
 %define major 0
 %define library_name awn
@@ -24,7 +24,7 @@ Summary: Dock-style window selector for GNOME
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: %{srcname}.tar.bz2
+Source0: %{srcname}.tar.lzma
 License: GPLv2+
 Group: Graphical desktop/GNOME
 Url: https://launchpad.net/awn
