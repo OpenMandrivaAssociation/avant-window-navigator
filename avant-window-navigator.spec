@@ -1,7 +1,7 @@
 %define name avant-window-navigator
-%define version 0.1.2
+%define version 0.2
 %define rel 1
-%define bzr 95
+%define bzr 0
 
 %define major 0
 %define library_name awn
@@ -18,13 +18,13 @@
 %define release %mkrel %{rel}
 %endif
 
-%define schemas switcher trash
+#%define schemas switcher trash
 
 Summary: Dock-style window selector for GNOME
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: %{srcname}.tar.lzma
+Source0: %{srcname}.tar
 License: GPLv2+
 Group: Graphical desktop/GNOME
 Url: https://launchpad.net/awn
@@ -105,10 +105,10 @@ perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir
 %post
 %update_menus
 %update_icon_cache hicolor
-%post_install_gconf_schemas %{schemas}
+#%post_install_gconf_schemas %{schemas}
 
 %preun
-%preun_uninstall_gconf_schemas %{schemas}
+#%preun_uninstall_gconf_schemas %{schemas}
 
 %postun
 %update_menus
@@ -127,17 +127,16 @@ rm -rf %{buildroot}
 %_datadir/applications/%{name}.desktop
 %_datadir/applications/awn-manager.desktop
 %_libdir/%{library_name}
-%_sysconfdir/gconf/schemas/*.schemas
+#%_sysconfdir/gconf/schemas/*.schemas
 %_iconsdir/hicolor/16x16/apps/%{name}.png
 %_iconsdir/hicolor/32x32/apps/%{name}.png
 %_iconsdir/hicolor/48x48/apps/%{name}.png
 %_iconsdir/hicolor/scalable/apps/%{name}.svg
+%py_platsitedir/%library_name
 
 %files -n %libname
 %defattr(-,root,root)
 %_libdir/*.so.%{major}*
-%dir %py_platsitedir/%library_name
-%py_platsitedir/%library_name/*
 
 %files -n %develname
 %defattr(-,root,root,-)
