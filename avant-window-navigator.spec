@@ -1,5 +1,5 @@
 %define name avant-window-navigator
-%define version 0.2
+%define version 0.2.1
 %define rel 1
 %define bzr 0
 
@@ -105,10 +105,10 @@ perl -pi -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %buildroot%{_datadir
 %post
 %update_menus
 %update_icon_cache hicolor
-#%post_install_gconf_schemas %{schemas}
+#post_install_gconf_schemas %{schemas}
 
-%preun
-#%preun_uninstall_gconf_schemas %{schemas}
+#preun
+#preun_uninstall_gconf_schemas %{schemas}
 
 %postun
 %update_menus
