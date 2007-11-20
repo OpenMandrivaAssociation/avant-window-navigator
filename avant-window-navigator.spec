@@ -1,6 +1,6 @@
 %define name avant-window-navigator
 %define version 0.2.1
-%define rel 2
+%define rel 3
 %define bzr 0
 
 %define major 0
@@ -48,7 +48,7 @@ Requires: gnome-python
 Requires: gnome-python-gconf
 Requires: gnome-desktop
 Requires: gnome-python-gnomevfs
-Requires: gnome-python-applets
+Requires: gnome-python-applet
 Requires: pygtk2.0-libglade
 
 %description
