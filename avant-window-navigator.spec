@@ -28,6 +28,7 @@ Source0: %{srcname}.tar
 License: GPLv2+
 Group: Graphical desktop/GNOME
 Url: https://launchpad.net/awn
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: gnome-common
 BuildRequires: libGConf2-devel
 BuildRequires: intltool
