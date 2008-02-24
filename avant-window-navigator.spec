@@ -87,6 +87,7 @@ headers for AWN.
 %prep
 %setup -q -n %{distname}
 %patch0 -p1 -b .schemas
+sed -i -e 's.0,0.1,0.g' acinclude.m4
 
 %build
 %if %bzr
@@ -158,3 +159,5 @@ rm -rf %{buildroot}
 %{_libdir}/lib*.so
 %{_libdir}/*.*a
 %{_libdir}/pkgconfig/%{library_name}.pc
+%{_datadir}/vala/vapi/awn.*
+
