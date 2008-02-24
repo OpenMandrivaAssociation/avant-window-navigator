@@ -46,12 +46,15 @@ BuildRequires:	python-devel
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	gnome-python
 BuildRequires:	gtk-doc
+BuildRequires:	pyxdg
+BuildRequires:	vala
 Requires:	gnome-python
 Requires:	gnome-python-gconf
 Requires:	gnome-desktop
 Requires:	gnome-python-gnomevfs
 Requires:	gnome-python-applet
 Requires:	pygtk2.0-libglade
+Requires:	pyxdg
 
 %description
 Avant Window Navigator is a dock-style window list for GNOME. It provides
