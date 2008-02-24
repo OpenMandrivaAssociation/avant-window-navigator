@@ -18,6 +18,9 @@
 
 %define schemas awn
 
+%define python_compile_opt python -O -c "import compileall; compileall.compile_dir('.')"
+%define python_compile     python -c "import compileall; compileall.compile_dir('.')"
+
 Summary:	Dock-style window selector for GNOME
 Name:		avant-window-navigator
 Version:	0.2.6
@@ -117,6 +120,11 @@ convert -scale 16 data/%{name}-48.png %{buildroot}%{_iconsdir}/hicolor/16x16/app
 sed -i -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %{buildroot}%{_datadir}/applications/%{name}.desktop
 sed -i -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %{buildroot}%{_datadir}/applications/awn-manager.desktop
 
+dir -d %{buildroot}%{_datadir}/%{name}/awn-manager
+%python_compile_opt
+%python_compile
+install awn-manager/*.pyc awn-manager/*.pyo %{buildroot}%{_datadir}/%{name}/awn-manager
+
 %post
 %update_menus
 %update_icon_cache hicolor
@@ -148,6 +156,7 @@ rm -rf %{buildroot}
 %{_iconsdir}/hicolor/*/apps/%{name}.*
 %{_iconsdir}/hicolor/*/apps/awn-manager.*
 %{py_platsitedir}/%{library_name}
+%{py_puresitedir}/%{library_name}
 
 %files -n %{libname}
 %defattr(-,root,root)
