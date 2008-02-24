@@ -87,12 +87,16 @@ headers for AWN.
 %prep
 %setup -q -n %{distname}
 %patch0 -p1 -b .schemas
+# Fiddles with a macro to make Python stuff go to platsitedir not
+# puresitedir - AdamW 2008/02
 sed -i -e 's.0,0.1,0.g' acinclude.m4
 
 %build
 %if %bzr
 ./autogen.sh -V
 %endif
+# Needed for the platsitedir fix above - AdamW 2008/02
+autoconf
 %configure2_5x --disable-schemas-install
 %make
 
