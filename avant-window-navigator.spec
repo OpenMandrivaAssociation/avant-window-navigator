@@ -1,4 +1,4 @@
-%define rel 1
+%define rel 2
 %define bzr 0
 
 %define major 0
@@ -23,9 +23,9 @@ Name:		avant-window-navigator
 Version:	0.2.6
 Release:	%{release}
 Source0:	%{srcname}.tar.gz
-# From upstream dev malept: fixes --disable-schemas-install parameter
-# - AdamW 2008/02
-Patch0:		avant-window-navigator-0.2.6-schemas.patch
+# From upstream dev malept: install Python stuff to platsitedir not
+# puresitedir - AdamW 2008/02
+Patch0:		avant-window-navigator-0.2.6-platsitedir.patch
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		https://launchpad.net/awn
@@ -86,17 +86,14 @@ headers for AWN.
 
 %prep
 %setup -q -n %{distname}
-%patch0 -p1 -b .schemas
-# Fiddles with a macro to make Python stuff go to platsitedir not
-# puresitedir - AdamW 2008/02
-sed -i -e 's.0,0.1,0.g' acinclude.m4
+%patch0 -p1 -b .platsitedir
 
 %build
 %if %bzr
 ./autogen.sh -V
 %endif
-# Needed for the platsitedir fix above - AdamW 2008/02
-autoconf
+# Needed for the platsitedir patch - AdamW 2008/02
+autoreconf
 %configure2_5x --disable-schemas-install
 %make
 
