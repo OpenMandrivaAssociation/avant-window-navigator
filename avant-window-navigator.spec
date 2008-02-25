@@ -1,4 +1,4 @@
-%define rel 2
+%define rel 3
 %define bzr 0
 
 %define major 0
@@ -156,7 +156,6 @@ rm -rf %{buildroot}
 %{_iconsdir}/hicolor/*/apps/%{name}.*
 %{_iconsdir}/hicolor/*/apps/awn-manager.*
 %{py_platsitedir}/%{library_name}
-%{py_puresitedir}/%{library_name}
 
 %files -n %{libname}
 %defattr(-,root,root)
