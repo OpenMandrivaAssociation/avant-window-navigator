@@ -1,4 +1,4 @@
-%define rel 4
+%define rel 5
 %define bzr 0
 
 %define major 0
@@ -21,7 +21,7 @@
 %define python_compile_opt python -O -c "import compileall; compileall.compile_dir('.')"
 %define python_compile     python -c "import compileall; compileall.compile_dir('.')"
 
-Summary:	Dock-style window selector for GNOME
+Summary:	AWN - a Dock-style window selector for GNOME
 Name:		avant-window-navigator
 Version:	0.2.6
 Release:	%{release}
@@ -60,19 +60,19 @@ Requires:	pygtk2.0-libglade
 Requires:	pyxdg
 
 %description
-Avant Window Navigator is a dock-style window list for GNOME. It provides
-a view of your running applications in a dock at the bottom of the screen,
-identified by their icon.
+Avant Window Navigator (AWN) is a dock-style window list for GNOME. It
+provides a view of your running applications in a dock at the bottom
+of the screen, identified by their icon.
 
 %package -n %{libname}
 Group: System/Libraries
 Summary: Shared libraries for avant-window-navigator
 
 %description -n %{libname}
-Avant Window Navigator is a dock-style window list for GNOME. It provides
-a view of your running applications in a dock at the bottom of the screen,
-identified by their icon. This package contains the shared library for
-AWN.
+Avant Window Navigator (AWN) is a dock-style window list for GNOME. It
+provides a view of your running applications in a dock at the bottom
+of the screen, identified by their icon. This package contains the
+shared library for AWN.
 
 %package -n %{develname}
 Group: Development/C
@@ -82,10 +82,10 @@ Provides: %{name}-devel = %{version}-%{release}
 Provides: %{library_name}-devel = %{version}-%{release}
 
 %description -n %{develname}
-Avant-window-navigator is a dock-style window list for GNOME. It provides
-a view of your running applications in a dock at the bottom of the screen,
-identified by their icon. This package contains development libraries and
-headers for AWN.
+Avant Window Navigator (AWN) is a dock-style window list for GNOME. It
+provides a view of your running applications in a dock at the bottom
+of the screen, identified by their icon. This package contains
+development libraries and headers for AWN.
 
 %prep
 %setup -q -n %{distname}
