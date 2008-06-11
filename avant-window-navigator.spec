@@ -130,7 +130,7 @@ install awn-manager/*.pyc awn-manager/*.pyo %{buildroot}%{_datadir}/%{name}/awn-
 %update_icon_cache hicolor
 %post_install_gconf_schemas %{schemas}
 
-#preun
+%preun
 %preun_uninstall_gconf_schemas %{schemas}
 
 %postun
