@@ -125,17 +125,21 @@ dir -d %{buildroot}%{_datadir}/%{name}/awn-manager
 %python_compile
 install awn-manager/*.pyc awn-manager/*.pyo %{buildroot}%{_datadir}/%{name}/awn-manager
 
+%if %mdkversion < 200900
 %post
 %update_menus
 %update_icon_cache hicolor
 %post_install_gconf_schemas %{schemas}
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas %{schemas}
 
+%if %mdkversion < 200900
 %postun
 %update_menus
 %clean_icon_cache hicolor
+%endif
 
 %clean
 rm -rf %{buildroot}
