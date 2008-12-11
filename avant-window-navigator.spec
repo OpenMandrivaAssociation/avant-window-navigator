@@ -43,7 +43,7 @@ BuildRequires:	libglade2.0-devel
 BuildRequires:	libwnck-devel
 BuildRequires:	libxcomposite-devel
 BuildRequires:	libxdamage-devel
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 BuildRequires:	desktop-file-utils
 BuildRequires:	python-devel
 BuildRequires:	pygtk2.0-devel
