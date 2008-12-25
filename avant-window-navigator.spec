@@ -21,6 +21,10 @@
 %define python_compile_opt python -O -c "import compileall; compileall.compile_dir('.')"
 %define python_compile     python -c "import compileall; compileall.compile_dir('.')"
 
+# It has a couple of string literal errors I'm not quite sure how to
+# fix, will report upstream - AdamW 2008/12
+%define Werror_cflags %nil
+
 Summary:	AWN - a Dock-style window selector for GNOME
 Name:		avant-window-navigator
 Version:	0.2.6
