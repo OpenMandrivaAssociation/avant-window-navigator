@@ -21,10 +21,6 @@
 %define python_compile_opt python -O -c "import compileall; compileall.compile_dir('.')"
 %define python_compile     python -c "import compileall; compileall.compile_dir('.')"
 
-# It has a couple of string literal errors I'm not quite sure how to
-# fix, will report upstream - AdamW 2008/12
-%define Werror_cflags %nil
-
 Summary:	AWN - a Dock-style window selector for GNOME
 Name:		avant-window-navigator
 Version:	0.3.2
@@ -117,6 +113,14 @@ dir -d %{buildroot}%{_datadir}/%{name}/awn-manager
 %python_compile
 install awn-manager/*.pyc awn-manager/*.pyo %{buildroot}%{_datadir}/%{name}/awn-manager
 
+cat > README.urpmi <<EOF
+If you are upgrading to version 0.3.2 of awn, please run
+'awn-applets-migration' from your user account after the package
+install is complete. Applet metadata files have been moved at the
+request of Debian in this release. This command will adjust awn for
+the new location, but unfortunately it cannot be run automatically.
+EOF
+
 %if %mdkversion < 200900
 %post
 %update_menus
@@ -138,7 +142,7 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc README AUTHORS ChangeLog TODO
+%doc README AUTHORS ChangeLog TODO README.urpmi
 %{_bindir}/%{name}
 %{_bindir}/awn-applet-activation
 %{_bindir}/awn-applets-migration
