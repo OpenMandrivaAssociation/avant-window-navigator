@@ -44,6 +44,7 @@ BuildRequires:	imagemagick
 BuildRequires:	desktop-file-utils
 BuildRequires:	python-devel
 BuildRequires:	pygtk2.0-devel
+BuildRequires:	pygtk2.0-libglade
 BuildRequires:	gnome-python
 BuildRequires:	gtk-doc
 BuildRequires:	pyxdg
