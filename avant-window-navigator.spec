@@ -44,7 +44,6 @@ BuildRequires:	imagemagick
 BuildRequires:	desktop-file-utils
 BuildRequires:	python-devel
 BuildRequires:	pygtk2.0-devel
-BuildRequires:	pygtk2.0-libglade
 BuildRequires:	gnome-python
 BuildRequires:	gtk-doc
 BuildRequires:	pyxdg
@@ -92,7 +91,7 @@ development libraries and headers for AWN.
 %if %bzr
 ./autogen.sh -V
 %endif
-%configure2_5x --disable-schemas-install
+%configure2_5x --disable-schemas-install --disable-pymod-checks
 %make
 
 %install
