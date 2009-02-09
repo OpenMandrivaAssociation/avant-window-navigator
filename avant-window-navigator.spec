@@ -1,4 +1,4 @@
-%define rel 9
+%define rel 1
 %define bzr 0
 
 %define major 0
@@ -27,12 +27,9 @@
 
 Summary:	AWN - a Dock-style window selector for GNOME
 Name:		avant-window-navigator
-Version:	0.2.6
+Version:	0.3.2
 Release:	%{release}
 Source0:	%{srcname}.tar.gz
-# From upstream dev malept: install Python stuff to platsitedir not
-# puresitedir - AdamW 2008/02
-Patch0:		avant-window-navigator-0.2.6-platsitedir.patch
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 URL:		https://launchpad.net/awn
@@ -93,14 +90,11 @@ development libraries and headers for AWN.
 
 %prep
 %setup -q -n %{distname}
-%patch0 -p1 -b .platsitedir
 
 %build
 %if %bzr
 ./autogen.sh -V
 %endif
-# Needed for the platsitedir patch - AdamW 2008/02
-autoreconf
 %configure2_5x --disable-schemas-install
 %make
 
@@ -114,12 +108,6 @@ desktop-file-install --vendor="" \
   --remove-category="X-Fedora" \
   --dir %{buildroot}%{_datadir}/applications \
 %{buildroot}%{_datadir}/applications/*
-
-mkdir -p %{buildroot}%{_iconsdir}/hicolor/{48x48,32x32,16x16,scalable}/apps
-install -m 644 %{buildroot}%{_datadir}/%{name}/%{name}.svg %{buildroot}%{_iconsdir}/hicolor/scalable/apps/%{name}.svg
-install -m 644 data/%{name}-48.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
-convert -scale 32 data/%{name}-48.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-convert -scale 16 data/%{name}-48.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 sed -i -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %{buildroot}%{_datadir}/applications/%{name}.desktop
 sed -i -e 's,/usr/share/%{name}/%{name}-48.png,%{name},g' %{buildroot}%{_datadir}/applications/awn-manager.desktop
@@ -153,13 +141,14 @@ rm -rf %{buildroot}
 %doc README AUTHORS ChangeLog TODO
 %{_bindir}/%{name}
 %{_bindir}/awn-applet-activation
+%{_bindir}/awn-applets-migration
+%{_bindir}/awn-autostart
 %{_bindir}/awn-launcher-editor
 %{_bindir}/awn-manager
 %{_bindir}/awn-schema-to-gconf
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/applications/awn-manager.desktop
-%{_libdir}/%{library_name}
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_iconsdir}/hicolor/*/apps/%{name}.*
 %{_iconsdir}/hicolor/*/apps/awn-manager.*
