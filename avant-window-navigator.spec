@@ -1,4 +1,4 @@
-%define rel 3
+%define rel 4
 %define bzr 0
 
 %define major 0
