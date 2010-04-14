@@ -36,6 +36,7 @@ BuildRequires:	python-devel
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	libdesktop-agnostic-devel
 BuildRequires:	vala
+BuildRequires:	dbus-glib-devel
 BuildRequires:	pyxdg
 Requires:	pyxdg
 
