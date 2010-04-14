@@ -36,6 +36,8 @@ BuildRequires:	python-devel
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	libdesktop-agnostic-devel
 BuildRequires:	vala
+BuildRequires:	pyxdg
+Requires:	pyxdg
 
 %description
 Avant Window Navigator (AWN) is a dock-style window list for GNOME. It
