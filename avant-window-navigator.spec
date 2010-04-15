@@ -6,6 +6,8 @@
 %define libname %mklibname %library_name %major
 %define develname %mklibname %library_name -d
 
+%define oldlibname %mklibname %library_name 0
+
 %if %bzr
 %define srcname %{name}-%{bzr}
 %define distname %{name}
@@ -13,7 +15,7 @@
 %else
 %define srcname %{name}-%{version}
 %define distname %{name}-%{version}
-%define release %mkrel 1
+%define release %mkrel 2
 %endif
 
 Summary:	AWN - a Dock-style window selector for GNOME
@@ -39,6 +41,7 @@ BuildRequires:	vala
 BuildRequires:	dbus-glib-devel
 BuildRequires:	pyxdg
 Requires:	pyxdg
+Obsoletes:	%oldlibname
 
 %description
 Avant Window Navigator (AWN) is a dock-style window list for GNOME. It
