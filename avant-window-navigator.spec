@@ -15,7 +15,7 @@
 %else
 %define srcname %{name}-%{version}
 %define distname %{name}-%{version}
-%define release %mkrel 3
+%define release %mkrel 4
 %endif
 
 Summary:	AWN - a Dock-style window selector for GNOME
@@ -42,6 +42,7 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	pyxdg
 Requires:	pyxdg
 Requires:	pygtk2
+Requires:	python-dbus
 Obsoletes:	%oldlibname
 
 %description
