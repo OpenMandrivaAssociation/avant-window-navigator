@@ -1,4 +1,4 @@
-%define rel 3
+%define rel 6
 %define bzr 0
 
 %define major 1
@@ -15,7 +15,7 @@
 %else
 %define srcname %{name}-%{version}
 %define distname %{name}-%{version}
-%define release %mkrel 5
+%define release %mkrel %{rel}
 %endif
 
 Summary:	AWN - a Dock-style window selector for GNOME
