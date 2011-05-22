@@ -40,6 +40,7 @@ BuildRequires:	libdesktop-agnostic-devel
 BuildRequires:	vala
 BuildRequires:	dbus-glib-devel
 BuildRequires:	pyxdg
+BuildRequires:	GConf2
 Requires:	pyxdg
 Requires:	pygtk2
 Requires:	python-dbus
