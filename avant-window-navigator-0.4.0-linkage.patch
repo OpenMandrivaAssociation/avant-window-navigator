@@ -1,0 +1,24 @@
+diff -urN avant-window-navigator-0.4.0/src/Makefile.in avant-window-navigator-0.4.0-patched/src/Makefile.in
+--- avant-window-navigator-0.4.0/src/Makefile.in	2010-04-12 01:29:23.000000000 +1100
++++ avant-window-navigator-0.4.0-patched/src/Makefile.in	2012-11-20 01:10:21.434633771 +1100
+@@ -447,7 +447,7 @@
+ 	rm -f $$list
+ avant-window-navigator$(EXEEXT): $(avant_window_navigator_OBJECTS) $(avant_window_navigator_DEPENDENCIES) 
+ 	@rm -f avant-window-navigator$(EXEEXT)
+-	$(LINK) $(avant_window_navigator_OBJECTS) $(avant_window_navigator_LDADD) $(LIBS)
++	$(LINK) $(avant_window_navigator_OBJECTS) $(avant_window_navigator_LDADD) $(LIBS) -ldesktop-agnostic -ldesktop-agnostic-vfs -ldesktop-agnostic-cfg -lgtk-x11-2.0 -lgdk-x11-2.0 -lgdk_pixbuf-2.0 -lcairo -ldbus-glib-1 -lgobject-2.0 -lglib-2.0
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+diff -urN avant-window-navigator-0.4.0/tests/Makefile.in avant-window-navigator-0.4.0-patched/tests/Makefile.in
+--- avant-window-navigator-0.4.0/tests/Makefile.in	2010-04-12 01:29:23.000000000 +1100
++++ avant-window-navigator-0.4.0-patched/tests/Makefile.in	2012-11-20 01:11:57.853302882 +1100
+@@ -184,7 +184,7 @@
+ LIBDIR = @LIBDIR@
+ LIBOBJS = @LIBOBJS@
+ LIBRARY_MODULES = @LIBRARY_MODULES@
+-LIBS = @LIBS@
++LIBS = @LIBS@ -lgtk-x11-2.0 -lgdk-x11-2.0 -lgobject-2.0 -lglib-2.0 -lgdk_pixbuf-2.0 -lcairo
+ LIBTOOL = @LIBTOOL@
+ LIPO = @LIPO@
+ LN_S = @LN_S@
