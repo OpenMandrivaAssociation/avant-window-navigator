@@ -1,32 +1,32 @@
 %define major 1
-%define library_name awn
-%define libname %mklibname %{library_name} %{major}
-%define develname %mklibname %{library_name} -d
+%define sname awn
+%define libname %mklibname %{sname} %{major}
+%define devname %mklibname %{sname} -d
 
 Summary:	AWN - a Dock-style window selector for GNOME
 Name:		avant-window-navigator
 Version:	0.4.0
-Release:	8
+Release:	9
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
-URL:		https://launchpad.net/awn
+Url:		https://launchpad.net/awn
 Source0:	http://launchpad.net/awn/0.4/%{version}/+download/%{name}-%{version}.tar.gz
 # add upstream patch to fix unintialized null pointer
 Patch0:		avant-window-navigator-0.4.0-688_687.diff
 Patch1:		avant-window-navigator-0.4.0-linkage.patch
 BuildRequires:	desktop-file-utils
+BuildRequires:	GConf2
 BuildRequires:	intltool
+BuildRequires:	pyxdg
+BuildRequires:	vala
 BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	pkgconfig(desktop-agnostic)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libgtop-2.0)
 BuildRequires:	pkgconfig(libwnck-1.0)
-BuildRequires:	python-devel
+BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(pygtk-2.0)
 BuildRequires:	pkgconfig(pycairo)
-BuildRequires:	libdesktop-agnostic-devel
-BuildRequires:	vala
-BuildRequires:	pyxdg
-BuildRequires:	GConf2
 Requires:	pyxdg
 Requires:	pygtk2
 Requires:	python-dbus
@@ -49,14 +49,14 @@ provides a view of your running applications in a dock at the bottom
 of the screen, identified by their icon. This package contains the
 shared library for AWN.
 
-%package -n %{develname}
+%package -n %{devname}
 Group:		Development/C
 Summary:	Development libraries for avant-window-navigator
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	%{library_name}-devel = %{version}-%{release}
+Provides:	%{sname}-devel = %{version}-%{release}
 
-%description -n %{develname}
+%description -n %{devname}
 Avant Window Navigator (AWN) is a dock-style window list for GNOME. It
 provides a view of your running applications in a dock at the bottom
 of the screen, identified by their icon. This package contains
@@ -68,7 +68,7 @@ development libraries and headers for AWN.
 %patch1 -p1
 
 %build
-%configure2_5x --disable-static \
+%configure \
 	--with-vala \
 	--with-gnu-ld \
 	--enable-shave \
@@ -81,12 +81,11 @@ export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 %find_lang %{name} --with-html
 
-desktop-file-install --vendor="" \
-  --add-category="GTK" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
-
-# don't ship .a and .la
-find %{buildroot} -name "*.*a" -exec rm -f {} \;
+desktop-file-install \
+	--vendor="" \
+	--add-category="GTK" \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{buildroot}%{_datadir}/applications/*
 
 %files -f %{name}.lang
 %doc README AUTHORS ChangeLog TODO
@@ -107,11 +106,11 @@ find %{buildroot} -name "*.*a" -exec rm -f {} \;
 %files -n %{libname}
 %{_libdir}/libawn.so.%{major}*
 
-%files -n %{develname}
-%doc %{_datadir}/gtk-doc/html/lib%{library_name}
-%{_includedir}/lib%{library_name}
+%files -n %{devname}
+%doc %{_datadir}/gtk-doc/html/lib%{sname}
+%{_includedir}/lib%{sname}
 %{_libdir}/libawn.so
-%{_libdir}/pkgconfig/%{library_name}.pc
+%{_libdir}/pkgconfig/%{sname}.pc
 %{_datadir}/vala/vapi/awn.*
 %{_datadir}/pygtk/2.0/defs/awn.defs
 
