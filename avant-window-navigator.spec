@@ -6,7 +6,7 @@
 Summary:	AWN - a Dock-style window selector for GNOME
 Name:		avant-window-navigator
 Version:	0.4.0
-Release:	9
+Release:	10
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://launchpad.net/awn
