@@ -14,6 +14,11 @@ Source0:	http://launchpad.net/awn/0.4/%{version}/+download/%{name}-%{version}.ta
 # add upstream patch to fix unintialized null pointer
 Patch0:		avant-window-navigator-0.4.0-688_687.diff
 Patch1:		avant-window-navigator-0.4.0-linkage.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	desktop-file-utils
 BuildRequires:	GConf2
 BuildRequires:	intltool
